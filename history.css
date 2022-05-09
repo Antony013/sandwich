@@ -470,9 +470,9 @@ img{
 
 .orderNone{
 	position: absolute;
-	top: 70%;
+	top: 75%;
 	left: 50%;
-	transform: translate(-50%,-70%);
+	transform: translate(-50%,-75%);
 	text-align: center;
 	color: #1F2D46;
 	font-weight: bold;
