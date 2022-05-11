@@ -47,7 +47,7 @@
 					<!-- btn pour rediriger à la page de connexion -->
 					<a href="require/login/login.php" >
 						<button type="button" class="btn-log">
-							Commander
+							Mon espace
 						</button>
 					</a>
 				</div>
