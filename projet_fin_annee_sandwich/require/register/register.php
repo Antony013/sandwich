@@ -18,10 +18,10 @@
 		$nom_user = $_POST['nom_user'];
 		$prenom_user = $_POST['prenom_user'];
 		// on récupère le mdp saisie qu'on met dans la var newpass
-		$newpass = password_hash($_POST['password_user'], PASSWORD_ARGON2I);
+		$newpass = $_POST['password_user'];
 
 		// si le insert devient False alors l'inscription ne se fait pas
-		$insert = False;
+		$insert = True;
 
 		// on prerape une requete pour selectionner le mail dans la bd 
 		$mexist = $co->prepare('SELECT email_user FROM utilisateur WHERE email_user = ?');
@@ -31,7 +31,7 @@
 		$mailexist = $mexist->fetch();
 
 		// on perare la requete pour inserer un nouveau utilisateur dans la bd
-		$insert = $co->prepare("INSERT INTO utilisateur (role_user, email_user, password_user, nom_user, prenom_user, active_user) VALUES ('b', :email_user, :password_user, :nom_user, :prenom_user, 1)");
+		$insertAccount = $co->prepare("INSERT INTO utilisateur (role_user, email_user, password_user, nom_user, prenom_user, active_user) VALUES ('b', :email_user, :password_user, :nom_user, :prenom_user, 1)");
 
 		// on verifie si le mail existe ou pas
 		if(!$mailexist){
@@ -42,12 +42,12 @@
 			}
 			// on verifie qu'il y ai bien un chiffre dans le mdp saisie
 			if (!preg_match("#[0-9]+#",$newpass)) {
-				$errorPass;
+				$errorPass = "Votre mot de passe doit contenir 8 caractères ou plus, au minimum 1 chiffre et au moins un caractère spécial";
 				$insert = False;
 			}
 			// on verifie si il y a bien un caractère spécial dans le mdp saisie
 			if (preg_match("#^[a-z0-9]+$#i", $newpass)) {
-				$errorPass;
+				$errorPass = "Votre mot de passe doit contenir 8 caractères ou plus, au minimum 1 chiffre et au moins un caractère spécial";
 				$insert = False;
 			}
 			// on verifie si le champ est vide
@@ -79,7 +79,7 @@
 		// on verifie si le insert est True ou False
 		if ($insert == True) {
 			// si le mail existe pas dans la bd alors on execute la requete
-			$insert -> execute(array('email_user' => $_POST['email_user'], 'password_user' => $newpass, 'nom_user' => $_POST['nom_user'], 'prenom_user' => $_POST['prenom_user']));
+			$insertAccount -> execute(array('email_user' => $_POST['email_user'], 'password_user' => password_hash($_POST['password_user'], PASSWORD_ARGON2I), 'nom_user' => $_POST['nom_user'], 'prenom_user' => $_POST['prenom_user']));
 			header("Location: ../login/login.php");
 		}
 	}   
