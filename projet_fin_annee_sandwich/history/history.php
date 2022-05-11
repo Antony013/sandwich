@@ -277,7 +277,7 @@
 							<h4 class="help-inline"><?php echo $newFilterError ?></h4>
 
 							<input id="submit_filter" type="submit" name="submit_filter" value="Appliquer le filtre">
-							<a id="filter_order" href="historique.php?trie=<?php echo $nextTrie ?>" class="btn btn-default">
+							<a id="filter_order" href="history.php?trie=<?php echo $nextTrie ?>" class="btn btn-default">
 								<p><?php echo $trieMessage ?></p><span class="bi-sort-numeric-down-alt"></span>
 							</a>
 						</form>
