@@ -27,6 +27,9 @@ section {
 
 /* ----------------------------------- index ----------------------------------- */
 
+#section-index{
+	margin-top: 60px;
+}
 
 #container-index, #container-backoffice {
 	display: flex;
@@ -117,6 +120,10 @@ section {
 
 
 /* ----------------------------------- login ----------------------------------- */
+#section-register{
+	margin-top: 60px;
+}
+
 #container-login, #conteneur-login-backoffice, #container-register {
 	display: flex;
 	justify-content: center;
@@ -213,7 +220,7 @@ hr {
 		margin-top: 0;
 	}
 	#form-connect .btn-log, #form-regis .btn-reg {
-		margin: 0 35px;
+		margin-top: 50px;
 		width: 75%;
 	}
 	#box-reg button, #box-reg img, #box-ref button, #box-ref img {
