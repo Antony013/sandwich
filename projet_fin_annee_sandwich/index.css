@@ -124,6 +124,12 @@ section {
 	top: 110px;
 }
 
+@media (max-width: 486px){
+	#menu-nav{
+		top: 160px;
+	}
+}
+
 #menu-nav a{
 	text-decoration: none;
 	display: inline-block;
@@ -153,42 +159,51 @@ section {
 	margin-top: 25px;
 }
 
-
 /* ----------------------------------- backoffice products/students ----------------------------------- */
 
-#components-consultation h2 {
+#components-consultation h2 ,#students-consultation h2{
 	text-align: center;
 	color: #1F2D46;
 	margin-top: 30px;
 }
 
-#components-consultation #hr {
+#hr {
 	border-top: 1px solid grey;
 	width: 200px;
 	margin: 0 auto 40px !important;
 }
 
-#components-consultation h3{
+#components-consultation h3 , #students-consultation h3{
 	width: 70%;
 	margin: 50px auto 20px;
 	color: #1F2D46;
 }
 
-#components-consultation h3 a{
+#components-consultation h3 a, #students-consultation h3 a{
 	color: grey;
 	text-decoration: none;
 }
 
-#components-consultation h3 a:hover{
+#components-consultation h3 a:hover, #students-consultation h3 a:hover{
 	color: #f2ca4b;
 }
 
-#components-consultation td{
+#components-consultation table ,#students-consultation table{
+	width: 70%;
+	margin: 0 auto;
+}
+
+@media (max-width: 600px){
+	#components-consultation table ,#students-consultation table{
+		width: 100%;	}
+}
+
+#components-consultation td, #students-consultation td{
 	text-align: center;
 	position: relative;
 }
 
-#components-consultation td p{
+#components-consultation td p, #students-consultation td p{
 	position: absolute;
 	top: 50%;
 	left: 50%;
@@ -197,37 +212,30 @@ section {
 
 .btn-table{
 	width: 125px;
-	margin-left: 10px;
-	margin-right: 10px;
+	margin: 10px;
 }
 
-@media (max-width: 890px){
-	.btn-table{
-		margin: 10px 0;
-	}
-}
-
-.btn-modif-product{
+.btn-modif-product, .btn-modif-eleve{
 	color: #1F2D46 !important;
 	border: 2px solid #1F2D46 !important;
 }
 
-.btn-delete-product,.btn-disable-product{
+.btn-delete-product,.btn-disable-product,.btn-delete-eleve,.btn-disable-eleve{
 	color: #1F2D46 !important;
 	border: 2px solid #f2ca4b !important;
 }
 
-.btn-modif-product:hover{
+.btn-modif-product:hover,.btn-modif-eleve:hover{
 	color: white !important;
 	background-color: #1F2D46;
 }
 
- .btn-disable-product:hover {
+ .btn-disable-product:hover,.btn-disable-eleve:hover {
 	color: white !important;
 	background-color: #f2ca4b;
 }
 
-.btn-delete-product:hover {
+.btn-delete-product:hover , .btn-delete-eleve:hover {
 	color: white !important;
 	background-color: #dc3546;
 	border-color: #dc3546 !important;
@@ -237,6 +245,14 @@ section {
 	float: right;
 	margin-top: 20px;
 }
+
+#components-consultation .modal input, #components-consultation .modal select, #students-consultation .modal input, #students-consultation .modal select{
+	width: 49%;
+	height: 40px;
+	border-color: #1F2D46;
+	display: inline-block;
+}
+
 
 /* ----------------------------------- login ----------------------------------- */
 #section-register{
