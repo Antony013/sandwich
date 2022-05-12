@@ -4,7 +4,7 @@
 
 	// Vérifie si l'utilisateur est connecté, sinon redirection vers la page de connexion
 	if(!isset($_SESSION["email_user"])){
-		header("Location: require/login/login.php");
+		header("Location: ../require/login/login.php");
 		exit(); 
 	}
 
@@ -28,7 +28,7 @@
 
 		if ($new){
 			$insert = $database -> prepare("INSERT INTO sandwich (nom_sandwich,dispo_sandwich) VALUES (?,?)");
-			$insert -> execute(array($name,1));
+			$insert -> execute(array($name,0));
 		}
 		else{
 			echo '	<script language="Javascript">
@@ -39,14 +39,48 @@
 	else if(isset($_POST["insert-boisson"])){
 		#récupération du produit à ajouter puis l'ajouter
 		$name = $_POST['newBoisson'];
-		$insert = $database -> prepare("INSERT INTO boisson (nom_boisson,dispo_boisson) VALUES (?,?)");
-		$insert -> execute(array($name,1));
+
+		$select = $database -> query("SELECT nom_boisson FROM boisson");
+		$new = True;
+		while ($rowSelect = $select -> fetch()){
+			if ($name == $rowSelect['nom_boisson']){
+				$new = False;
+				$newProductError = "Ce produit existe déjà";
+			}
+		}
+
+		if ($new){
+			$insert = $database -> prepare("INSERT INTO boisson (nom_boisson,dispo_boisson) VALUES (?,?)");
+			$insert -> execute(array($name,0));
+		}
+		else{
+			echo '	<script language="Javascript">
+						alert ("'.$newProductError.'" )
+					</script>';
+		}	
 	}
 	else if(isset($_POST["insert-dessert"])){
 		#récupération du produit à ajouter puis l'ajouter
 		$name = $_POST['newDessert'];
-		$insert = $database -> prepare("INSERT INTO dessert (nom_dessert,dispo_dessert) VALUES (?,?)");
-		$insert -> execute(array($name,1));
+
+		$select = $database -> query("SELECT nom_dessert FROM dessert");
+		$new = True;
+		while ($rowSelect = $select -> fetch()){
+			if ($name == $rowSelect['nom_dessert']){
+				$new = False;
+				$newProductError = "Ce produit existe déjà";
+			}
+		}
+
+		if ($new){
+			$insert = $database -> prepare("INSERT INTO dessert (nom_dessert,dispo_dessert) VALUES (?,?)");
+			$insert -> execute(array($name,0));
+		}
+		else{
+			echo '	<script language="Javascript">
+						alert ("'.$newProductError.'" )
+					</script>';
+		}
 	}
 	else if(isset($_POST["modify-sandwich"])){
 		#récupération de l'id du produit à modifier puis modification
@@ -58,7 +92,7 @@
 			$dispo = 1;
 		}
 		else{
-			$dispo = 2;
+			$dispo = 0;
 		}
 
 		$update = $database -> prepare("UPDATE sandwich SET nom_sandwich = ? , dispo_sandwich = ? WHERE id_sandwich=?");
@@ -74,7 +108,7 @@
 			$dispo = 1;
 		}
 		else{
-			$dispo = 2;
+			$dispo = 0;
 		}
 
 		$update = $database -> prepare("UPDATE boisson SET nom_boisson = ? , dispo_boisson = ? WHERE id_boisson=?");
@@ -90,7 +124,7 @@
 			$dispo = 1;
 		}
 		else{
-			$dispo = 2;
+			$dispo = 0;
 		}
 
 		$update = $database -> prepare("UPDATE dessert SET nom_dessert = ? , dispo_dessert = ? WHERE id_dessert=?");
@@ -150,7 +184,7 @@
 							<div class="modal-body">
 					        <div>
 					        	<form name="insert-sandwich" method="post" role="form" >
-									<input type="text" name="newSandwich" placeholder="Nom du sandwich" >
+									<input type="text" name="newSandwich" class="form-control" placeholder="Nom du sandwich">
 									<button class="btn btn-default btn-modal btn-modif-product" type="submit" name="insert-sandwich">Ajouter</button>
 								</form>
 					        </div> 
@@ -159,7 +193,7 @@
 				</div>
 			</div>
 
-			<table class="table table-striped table-bordered" style="width: 70%; margin: 0 auto;">
+			<table class="table table-striped table-bordered">
 				<tr>
 					<!-- titre des colones -->
 					<th>Nom du sandwich</th>
@@ -202,7 +236,7 @@
 			      								<div class="modal-body">
 											        <div>
 											        	<form name="modify-sandwich" method="post" role="form" > 
-											        		<input type="text" name="newName" value="'.$sandwich.'" >
+											        		<input type="text" name="newName" class="form-control" value="'.$sandwich.'" >
 											        		<select name="dispo" class="form-select">';
 						if ($dispo == 1){
 							echo '
@@ -273,7 +307,7 @@
 			      								<div class="modal-body">
 											        <div>
 											        	<form name="delete-sandwich" method="post" role="form" > 
-											        		"'.$sandwich.'" apparait dans au moins une commande, îl est inpossible de le supprimer. Voulez-vous le rendre indisponible ?
+											        		"'.$sandwich.'" apparait dans au moins une commande, îl est impossible de le supprimer. Voulez-vous le rendre indisponible ?
 															<input type="hidden" name="idDisable" value='.$rowSelect['id_sandwich'].' >
 															<button class="btn btn-default btn-modal btn-disable-product" type="submit" name="disable-sandwich">Oui</button>
 														</form>
@@ -302,7 +336,7 @@
 							<div class="modal-body">
 					        <div>
 					        	<form name="insert-boisson" method="post" role="form" >
-									<input type="text" name="newBoisson" placeholder="Nom de la boisson" >
+									<input type="text" name="newBoisson" class="form-control" placeholder="Nom de la boisson" >
 									<button class="btn btn-default btn-modal btn-modif-product" type="submit" name="insert-boisson">Ajouter</button>
 								</form>
 					        </div> 
@@ -311,7 +345,7 @@
 				</div>
 			</div>
 
-			<table class="table table-striped table-bordered" style="width: 70%; margin: 0 auto;">
+			<table class="table table-striped table-bordered">
 				<tr>
 					<!-- titre des colones -->
 					<th>Nom de la boisson</th>
@@ -354,7 +388,7 @@
 			      								<div class="modal-body">
 											        <div>
 											        	<form name="modify-boisson" method="post" role="form" > 
-											        		<input type="text" name="newName" value="'.$boisson.'" >
+											        		<input type="text" name="newName" class="form-control" value="'.$boisson.'" >
 											        		<select name="dispo" class="form-select">';
 						if ($dispo == 1){
 							echo '
@@ -425,7 +459,7 @@
 			      								<div class="modal-body">
 											        <div>
 											        	<form name="delete-boisson" method="post" role="form" > 
-											        		"'.$boisson.'" apparait dans au moins une commande, îl est inpossible de le supprimer. Voulez-vous le rendre indisponible ?
+											        		"'.$boisson.'" apparait dans au moins une commande, îl est impossible de le supprimer. Voulez-vous le rendre indisponible ?
 															<input type="hidden" name="idDisable" value='.$rowSelect['id_boisson'].' >
 															<button class="btn btn-default btn-modal btn-disable-product" type="submit" name="disable-boisson">Oui</button>
 														</form>
@@ -453,7 +487,7 @@
 							<div class="modal-body">
 					        <div>
 					        	<form name="insert-dessert" method="post" role="form" >
-									<input type="text" name="newDessert" placeholder="Nom du dessert" >
+									<input type="text" name="newDessert" class="form-control" placeholder="Nom du dessert" >
 									<button class="btn btn-default btn-modal btn-modif-product" type="submit" name="insert-dessert">Ajouter</button>
 								</form>
 					        </div> 
@@ -462,7 +496,7 @@
 				</div>
 			</div>
 
-			<table class="table table-striped table-bordered" style="width: 70%; margin: 0 auto;">
+			<table class="table table-striped table-bordered">
 				<tr>
 					<!-- titre des colones -->
 					<th>Nom du dessert</th>
@@ -490,7 +524,7 @@
 						else{
 							echo '<td><p><span class="bi-x-square" style="color: #dc3546"></span></p></td>';
 						}
-						
+
 						echo 	'<td>
 									<button class="btn btn-default btn-modif-product btn-table" data-bs-toggle="modal" data-bs-target="#modalModifydessert'.$rowSelect['id_dessert'].'">
 										Modifier <span class="bi-pencil"></span>				
@@ -505,7 +539,7 @@
 			      								<div class="modal-body">
 											        <div>
 											        	<form name="modify-dessert" method="post" role="form" > 
-											        		<input type="text" name="newName" value="'.$dessert.'" >
+											        		<input type="text" name="newName" class="form-control" value="'.$dessert.'" >
 											        		<select name="dispo" class="form-select">';
 						if ($dispo == 1){
 							echo '
@@ -576,7 +610,7 @@
 			      								<div class="modal-body">
 											        <div>
 											        	<form name="delete-dessert" method="post" role="form" > 
-											        		"'.$dessert.'" apparait dans au moins une commande, îl est inpossible de le supprimer. Voulez-vous le rendre indisponible ?
+											        		"'.$dessert.'" apparait dans au moins une commande, îl est impossible de le supprimer. Voulez-vous le rendre indisponible ?
 															<input type="hidden" name="idDisable" value='.$rowSelect['id_dessert'].' >
 															<button class="btn btn-default btn-modal btn-disable-product" type="submit" name="disable-dessert">Oui</button>
 														</form>
