@@ -154,6 +154,90 @@ section {
 }
 
 
+/* ----------------------------------- backoffice products/students ----------------------------------- */
+
+#components-consultation h2 {
+	text-align: center;
+	color: #1F2D46;
+	margin-top: 30px;
+}
+
+#components-consultation #hr {
+	border-top: 1px solid grey;
+	width: 200px;
+	margin: 0 auto 40px !important;
+}
+
+#components-consultation h3{
+	width: 70%;
+	margin: 50px auto 20px;
+	color: #1F2D46;
+}
+
+#components-consultation h3 a{
+	color: grey;
+	text-decoration: none;
+}
+
+#components-consultation h3 a:hover{
+	color: #f2ca4b;
+}
+
+#components-consultation td{
+	text-align: center;
+	position: relative;
+}
+
+#components-consultation td p{
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%,-50%);
+}
+
+.btn-table{
+	width: 125px;
+	margin-left: 10px;
+	margin-right: 10px;
+}
+
+@media (max-width: 890px){
+	.btn-table{
+		margin: 10px 0;
+	}
+}
+
+.btn-modif-product{
+	color: #1F2D46 !important;
+	border: 2px solid #1F2D46 !important;
+}
+
+.btn-delete-product,.btn-disable-product{
+	color: #1F2D46 !important;
+	border: 2px solid #f2ca4b !important;
+}
+
+.btn-modif-product:hover{
+	color: white !important;
+	background-color: #1F2D46;
+}
+
+ .btn-disable-product:hover {
+	color: white !important;
+	background-color: #f2ca4b;
+}
+
+.btn-delete-product:hover {
+	color: white !important;
+	background-color: #dc3546;
+	border-color: #dc3546 !important;
+}
+
+.btn-modal{
+	float: right;
+	margin-top: 20px;
+}
+
 /* ----------------------------------- login ----------------------------------- */
 #section-register{
 	margin-top: 50px;
