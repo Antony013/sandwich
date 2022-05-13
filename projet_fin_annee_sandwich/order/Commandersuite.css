@@ -1,0 +1,200 @@
+img{
+	width: 100%;
+	height: auto;
+}
+
+/*Body*/
+#Body{
+	position: absolute;
+    right: 5px;
+    top: 0;
+    bottom: 0;
+}
+.help-inline
+{
+    color: red;
+}
+#nav{
+	background: #1F2D46;
+	position: fixed;
+	top: 0;
+	bottom: 0;
+	text-align: center;
+}
+
+#brand{
+	margin:10px 0 25px;
+}
+
+
+#brand img{
+	margin-left: 5px;
+}
+
+#nav .name-user p{
+	font-size: 20px;
+	color: white;
+	margin: 30px auto 0;
+}
+
+#nav a{
+	text-align: left;
+	margin-top: 50px;
+	margin-left: 12px;
+    width: 95%;
+    color: white;
+    font-size: 20px;
+}
+
+#nav .nav_choice{
+	height: 100px;
+}
+
+#nav .nav_choice a{
+	border-radius: 20px;
+}
+
+#nav a span{
+	margin: 0 10%;
+	font-size: 25px;
+}
+
+#nav a p{
+	display: inline-block;
+	margin-bottom: 8px;
+}
+
+#nav .nav_choice a:hover{
+    border: 2px solid #f2ca4b;
+    color: #f2ca4b ;
+}
+
+#log_out{
+	position: absolute;
+	bottom: 10px;
+	left: 0;
+	color: white;
+}
+
+#log_out a span{
+	margin: 0 5% 0 10%;
+	font-size: 35px !important;
+	position: relative;
+}
+
+#log_out p{
+	position: absolute;
+	font-size: 15px;
+	bottom: 12px;
+}
+
+#log_out a:hover{
+	color: #f2ca4b !important;
+}
+
+@media (max-width: 991px){
+	#nav .nav_choice{
+		height: 80px;
+	}
+
+	#nav a{
+	    font-size: 15px;
+		margin-top: 25px;
+	}
+
+	#nav a span{
+		font-size: 20px;
+	}
+
+	#nav a p{
+		margin-bottom: 5px;
+	}
+
+	#log_out a span{
+		font-size: 30px !important;
+		margin: 0 5% 0 0%;
+	}
+
+	#log_out p{
+		font-size: 15px;
+	}
+}
+
+@media (max-width: 758px){
+	#nav .nav_choice{
+		height: 60px;
+	}
+
+	#nav a{
+	    font-size: 12px;
+		margin-top: 15px;
+		margin-left: 10px;
+	}
+
+	#nav a span{
+		font-size: 17px;
+	}
+
+	#nav a p{
+		margin-bottom: 3px;
+	}
+
+	#log_out a span{
+		font-size: 25px !important;
+		margin: 0 5% 0 10%;
+	}
+
+	#log_out p{
+		font-size: 12px;
+	}
+}
+
+@media (max-width: 450px){
+	#nav a{
+		margin-top: 15px;
+		margin-left: 10px;
+	}
+
+	#nav a span{
+		font-size: 15px;
+		margin: 0 5% 0 0;
+	}
+
+	#nav a p{
+		margin-bottom: 2px;
+	}
+
+	#log_out a span{
+		font-size: 20px !important;
+		margin: 0 5% 0 0;
+	}
+}
+
+/**/
+#tortilla
+{
+	width: 15%;
+}
+
+/**/	
+#drink{
+	width: 10%;
+}
+
+/*Section Chips et Cookie l'un à coté de l'autre*/
+#chips{
+	display: inline-block!important;
+}
+
+/**/
+#cookie{
+	display: inline-block!important;
+}
+
+/**/
+#j{
+	color: white;
+	background-color: #1F2D46;
+	border-radius: 10px;
+	margin : 0 15%;
+}
