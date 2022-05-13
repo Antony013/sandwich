@@ -91,19 +91,28 @@ section {
 
 @media (max-width: 505px) {
 	.btn-menu, .btn-log, .btn-modif {
-		margin: 50px 100px;
+		margin: 50px 25%;
 	}
 	.btn-log, .btn-modif {
-		margin: 0 100px;
+		margin: 0 25%;
 	}
 }
 
-@media (max-width: 425px) {
+@media (max-width: 320px) {
 	.btn-menu, .btn-log, .btn-modif {
-		margin: 50px 44px;
+		margin: 50px 16%;
 	}
 	.btn-log, .btn-modif {
-		margin: 0 44px;
+		margin: 0 16%;
+	}
+}
+
+@media (max-width: 375px) {
+	.btn-menu, .btn-log, .btn-modif {
+		margin: 50px 19%;
+	}
+	.btn-log, .btn-modif {
+		margin: 0 19%;
 	}
 }
 
@@ -122,12 +131,6 @@ section {
 	position: absolute;
 	text-align: center;
 	top: 110px;
-}
-
-@media (max-width: 486px){
-	#menu-nav{
-		top: 160px;
-	}
 }
 
 #menu-nav a{
@@ -161,96 +164,86 @@ section {
 
 /* ----------------------------------- backoffice products/students ----------------------------------- */
 
-#components-consultation h2 ,#students-consultation h2{
-	text-align: center;
-	color: #1F2D46;
-	margin-top: 30px;
+#components-consultation h2 {
+text-align: center;
+color: #1F2D46;
+margin-top: 30px;
 }
 
-#hr {
-	border-top: 1px solid grey;
-	width: 200px;
-	margin: 0 auto 40px !important;
+#components-consultation #hr {
+border-top: 1px solid grey;
+width: 200px;
+margin: 0 auto 40px !important;
 }
 
-#components-consultation h3 , #students-consultation h3{
-	width: 70%;
-	margin: 50px auto 20px;
-	color: #1F2D46;
+#components-consultation h3{
+width: 70%;
+margin: 50px auto 20px;
+color: #1F2D46;
 }
 
-#components-consultation h3 a, #students-consultation h3 a{
-	color: grey;
-	text-decoration: none;
+#components-consultation h3 a{
+color: grey;
+text-decoration: none;
 }
 
-#components-consultation h3 a:hover, #students-consultation h3 a:hover{
-	color: #f2ca4b;
+#components-consultation h3 a:hover{
+color: #f2ca4b;
 }
 
-#components-consultation table ,#students-consultation table{
-	width: 70%;
-	margin: 0 auto;
+#components-consultation td{
+text-align: center;
+position: relative;
 }
 
-@media (max-width: 600px){
-	#components-consultation table ,#students-consultation table{
-		width: 100%;	}
-}
-
-#components-consultation td, #students-consultation td{
-	text-align: center;
-	position: relative;
-}
-
-#components-consultation td p, #students-consultation td p{
-	position: absolute;
-	top: 50%;
-	left: 50%;
-	transform: translate(-50%,-50%);
+#components-consultation td p{
+position: absolute;
+top: 50%;
+left: 50%;
+transform: translate(-50%,-50%);
 }
 
 .btn-table{
-	width: 125px;
-	margin: 10px;
+width: 125px;
+margin-left: 10px;
+margin-right: 10px;
 }
 
-.btn-modif-product, .btn-modif-eleve{
-	color: #1F2D46 !important;
-	border: 2px solid #1F2D46 !important;
+@media (max-width: 890px){
+.btn-table{
+margin: 10px 0;
+}
 }
 
-.btn-delete-product,.btn-disable-product,.btn-delete-eleve,.btn-disable-eleve{
-	color: #1F2D46 !important;
-	border: 2px solid #f2ca4b !important;
+.btn-modif-product{
+color: #1F2D46 !important;
+border: 2px solid #1F2D46 !important;
 }
 
-.btn-modif-product:hover,.btn-modif-eleve:hover{
-	color: white !important;
-	background-color: #1F2D46;
+.btn-delete-product,.btn-disable-product{
+color: #1F2D46 !important;
+border: 2px solid #f2ca4b !important;
 }
 
- .btn-disable-product:hover,.btn-disable-eleve:hover {
-	color: white !important;
-	background-color: #f2ca4b;
+.btn-modif-product:hover{
+color: white !important;
+background-color: #1F2D46;
 }
 
-.btn-delete-product:hover , .btn-delete-eleve:hover {
-	color: white !important;
-	background-color: #dc3546;
-	border-color: #dc3546 !important;
+ .btn-disable-product:hover {
+color: white !important;
+background-color: #f2ca4b;
+}
+
+.btn-delete-product:hover {
+color: white !important;
+background-color: #dc3546;
+border-color: #dc3546 !important;
 }
 
 .btn-modal{
-	float: right;
-	margin-top: 20px;
-}
-
-#components-consultation .modal input, #components-consultation .modal select, #students-consultation .modal input, #students-consultation .modal select{
-	width: 49%;
-	height: 40px;
-	border-color: #1F2D46;
-	display: inline-block;
+float: right;
+margin-top: 20px;
 }
 
 
@@ -279,15 +272,25 @@ section {
 	background-color: white;
 }
 
+/*#box-reg:hover {
+	transform: scale(1.05,1.05);
+	box-shadow: rgba(0, 0, 0, 0.3) 0px 19px 38px, rgba(0, 0, 0, 0.22) 0px 15px 12px;
+}*/
+
 #box-reg p {
 	margin: 60px 0;
 }
 
 #box-reg button {
-	border: 1px solid #1F2D46;
 	width: 340px;
 	height: 65px;
 	border-radius: 20px;
+	border: 1px solid #1F2D46;
+}
+
+#box-reg button:hover {
+	/*font-size: 20px;*/
+	transform: scale(1.05,1.05);
 }
 
 #box-reg a{
