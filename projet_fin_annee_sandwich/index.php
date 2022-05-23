@@ -11,7 +11,7 @@
 				<!-- partie gauche de la page -->
 				<div id="left-index">
 					<p id="first-txt-index">
-						Câ€™est le bon moment pour commander votre sandwich prÃ©fÃ©rÃ©
+						C’est le bon moment pour commander votre sandwich préféré
 					</p>
 					<h1>
 						La sandwicherie<br>de Saint-Vincent
@@ -44,7 +44,7 @@
 							</div>
 						</div>
 					</div>
-					<!-- btn pour rediriger Ã  la page de connexion -->
+					<!-- btn pour rediriger à la page de connexion -->
 					<a href="require/login/login.php" >
 						<button type="button" class="btn-log">
 							Mon espace
