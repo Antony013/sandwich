@@ -17,6 +17,15 @@
 		#récupération du produit à ajouter puis l'ajouter
 		$name = $_POST['newSandwich'];
 
+		$dispo = $_POST['dispo'];
+
+		if ($dispo == "Disponible"){
+			$dispo = 1;
+		}
+		else{
+			$dispo = 0;
+		}
+
 		$select = $database -> query("SELECT nom_sandwich FROM sandwich");
 		$new = True;
 		while ($rowSelect = $select -> fetch()){
@@ -28,7 +37,7 @@
 
 		if ($new){
 			$insert = $database -> prepare("INSERT INTO sandwich (nom_sandwich,dispo_sandwich) VALUES (?,?)");
-			$insert -> execute(array($name,0));
+			$insert -> execute(array($name,$dispo));
 		}
 		else{
 			echo '	<script language="Javascript">
@@ -39,6 +48,15 @@
 	else if(isset($_POST["insert-boisson"])){
 		#récupération du produit à ajouter puis l'ajouter
 		$name = $_POST['newBoisson'];
+
+		$dispo = $_POST['dispo'];
+
+		if ($dispo == "Disponible"){
+			$dispo = 1;
+		}
+		else{
+			$dispo = 0;
+		}
 
 		$select = $database -> query("SELECT nom_boisson FROM boisson");
 		$new = True;
@@ -51,7 +69,7 @@
 
 		if ($new){
 			$insert = $database -> prepare("INSERT INTO boisson (nom_boisson,dispo_boisson) VALUES (?,?)");
-			$insert -> execute(array($name,0));
+			$insert -> execute(array($name,$dispo));
 		}
 		else{
 			echo '	<script language="Javascript">
@@ -62,6 +80,15 @@
 	else if(isset($_POST["insert-dessert"])){
 		#récupération du produit à ajouter puis l'ajouter
 		$name = $_POST['newDessert'];
+
+		$dispo = $_POST['dispo'];
+
+		if ($dispo == "Disponible"){
+			$dispo = 1;
+		}
+		else{
+			$dispo = 0;
+		}
 
 		$select = $database -> query("SELECT nom_dessert FROM dessert");
 		$new = True;
@@ -74,7 +101,7 @@
 
 		if ($new){
 			$insert = $database -> prepare("INSERT INTO dessert (nom_dessert,dispo_dessert) VALUES (?,?)");
-			$insert -> execute(array($name,0));
+			$insert -> execute(array($name,$dispo));
 		}
 		else{
 			echo '	<script language="Javascript">
@@ -88,6 +115,13 @@
 		$newName = $_POST['newName'];
 		$dispo = $_POST['dispo'];
 
+		$ok = True;
+
+		if (empty($newName)){
+			$ok = False;
+			$newProductError = "Un champ n'est pas rempli";
+		}
+
 		if ($dispo == "Disponible"){
 			$dispo = 1;
 		}
@@ -95,8 +129,26 @@
 			$dispo = 0;
 		}
 
-		$update = $database -> prepare("UPDATE sandwich SET nom_sandwich = ? , dispo_sandwich = ? WHERE id_sandwich=?");
-		$update -> execute(array($newName,$dispo,$idModif));
+		$select = $database -> prepare("SELECT nom_sandwich FROM sandwich WHERE id_sandwich != ?");
+		$select -> execute(array($idModif));
+		$new = True;
+		while ($rowSelect = $select -> fetch()){
+			if ($newName == $rowSelect['nom_sandwich']){
+				$new = False;
+				$newProductError = "Ce produit existe déjà";
+			}
+		}
+
+		if ($new and $ok){
+			$update = $database -> prepare("UPDATE sandwich SET nom_sandwich = ? , dispo_sandwich = ? WHERE id_sandwich=?");
+			$update -> execute(array($newName,$dispo,$idModif));
+		}
+		else{
+			echo '	<script language="Javascript">
+						alert ("'.$newProductError.'" )
+					</script>';
+		}
+
 	}
 	else if(isset($_POST["modify-boisson"])){
 		#récupération de l'id du produit à modifier puis modification
@@ -104,6 +156,13 @@
 		$newName = $_POST['newName'];
 		$dispo = $_POST['dispo'];
 
+		$ok = True;
+
+		if (empty($newName)){
+			$ok = False;
+			$newProductError = "Un champ n'est pas rempli";
+		}
+
 		if ($dispo == "Disponible"){
 			$dispo = 1;
 		}
@@ -111,14 +170,37 @@
 			$dispo = 0;
 		}
 
-		$update = $database -> prepare("UPDATE boisson SET nom_boisson = ? , dispo_boisson = ? WHERE id_boisson=?");
-		$update -> execute(array($newName,$dispo,$idModif));
+		$select = $database -> prepare("SELECT nom_boisson FROM boisson WHERE id_boisson != ?");
+		$select -> execute(array($idModif));
+		$new = True;
+		while ($rowSelect = $select -> fetch()){
+			if ($newName == $rowSelect['nom_boisson']){
+				$new = False;
+				$newProductError = "Ce produit existe déjà";
+			}
+		}
+
+		if ($new and $ok){
+			$update = $database -> prepare("UPDATE boisson SET nom_boisson = ? , dispo_boisson = ? WHERE id_boisson=?");
+			$update -> execute(array($newName,$dispo,$idModif));
+		}
+		else{
+			echo '	<script language="Javascript">
+						alert ("'.$newProductError.'" )
+					</script>';
+		}
 	}
 	else if(isset($_POST["modify-dessert"])){
 		#récupération de l'id du produit à modifier puis modification
 		$idModif = $_POST['idModif'];
 		$newName = $_POST['newName'];
 		$dispo = $_POST['dispo'];
+		$ok = True;
+
+		if (empty($newName)){
+			$ok = False;
+			$newProductError = "Un champ n'est pas rempli";
+		}
 
 		if ($dispo == "Disponible"){
 			$dispo = 1;
@@ -127,8 +209,25 @@
 			$dispo = 0;
 		}
 
-		$update = $database -> prepare("UPDATE dessert SET nom_dessert = ? , dispo_dessert = ? WHERE id_dessert=?");
-		$update -> execute(array($typeModif,$newName,$dispo,$idModif));
+		$select = $database -> prepare("SELECT nom_dessert FROM dessert WHERE id_dessert != ?");
+		$select -> execute(array($idModif));
+		$new = True;
+		while ($rowSelect = $select -> fetch()){
+			if ($newName == $rowSelect['nom_dessert']){
+				$new = False;
+				$newProductError = "Ce produit existe déjà";
+			}
+		}
+
+		if ($new and $ok){
+			$update = $database -> prepare("UPDATE dessert SET nom_dessert = ? , dispo_dessert = ? WHERE id_dessert=?");
+			$update -> execute(array($newName,$dispo,$idModif));
+		}
+		else{
+			echo '	<script language="Javascript">
+						alert ("'.$newProductError.'" )
+					</script>';
+		}
 	}
 	else if(isset($_POST["delete-sandwich"])){
 		#récupération de l'id du produit à supprimer puis suppresion
@@ -185,6 +284,10 @@
 					        <div>
 					        	<form name="insert-sandwich" method="post" role="form" >
 									<input type="text" name="newSandwich" class="form-control" placeholder="Nom du sandwich">
+									<select name="dispo" class="form-select">';
+								        <option selected>Disponible</option>
+										<option>Indisponible</option>';
+									</select>
 									<button class="btn btn-default btn-modal btn-modif-product" type="submit" name="insert-sandwich">Ajouter</button>
 								</form>
 					        </div> 
@@ -337,6 +440,10 @@
 					        <div>
 					        	<form name="insert-boisson" method="post" role="form" >
 									<input type="text" name="newBoisson" class="form-control" placeholder="Nom de la boisson" >
+									<select name="dispo" class="form-select">';
+								        <option selected>Disponible</option>
+										<option>Indisponible</option>';
+									</select>
 									<button class="btn btn-default btn-modal btn-modif-product" type="submit" name="insert-boisson">Ajouter</button>
 								</form>
 					        </div> 
@@ -488,6 +595,10 @@
 					        <div>
 					        	<form name="insert-dessert" method="post" role="form" >
 									<input type="text" name="newDessert" class="form-control" placeholder="Nom du dessert" >
+									<select name="dispo" class="form-select">';
+								        <option selected>Disponible</option>
+										<option>Indisponible</option>';
+									</select>
 									<button class="btn btn-default btn-modal btn-modif-product" type="submit" name="insert-dessert">Ajouter</button>
 								</form>
 					        </div> 
