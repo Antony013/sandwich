@@ -1,8 +1,8 @@
 <?php
-	// Récupération des données de la session
+	// RÃ©cupÃ©ration des donnÃ©es de la session
 	session_start();
 
-	// Vérifie si l'utilisateur est connecté, sinon redirection vers la page de connexion
+	// VÃ©rifie si l'utilisateur est connectÃ©, sinon redirection vers la page de connexion
 	if(!isset($_SESSION["email_user"])){
 		header("Location: ../require/login/login.php");
 		exit(); 
@@ -19,16 +19,42 @@
 		header("Location: backoffice.php");
 	}
 
+	$ok = "";
+
+	// modification du pdf d'accueil - upload du fichier pdf
 	if (isset($_POST["modifier-pdf"])) {
-		$lien_pdf = $_POST["lien_pdf"];
-		$modifier = $database -> query("UPDATE accueil SET lien_pdf = '$lien_pdf'");	
+		//$lien_pdf = $_POST["lien_pdf"];
+	    
+	    // on déclre un tableau avec les extensions qu'on accepte donc ici que pdf
+		// $validExt = array('.pdf');
+
+		// on verifie si il y a une erreur dans le transfert
+		if($_FILES['lien_pdf']['error'] > 0) {
+			echo "Erreur dans le stranfert";
+			// renvoi le numero de l'erreur et donc se referer a la doc
+			echo $_FILES['lien_pdf']['error'];
+		}
+
+		$fileName = $_FILES['lien_pdf']['name'];
+		
+		$pathName = '../doc/'.basename($fileName);
+		
+		// si le resultat est true alors c'est réussi
+		if(move_uploaded_file($_FILES['lien_pdf']['tmp_name'], $pathName)) {
+			$select = $database -> query("SELECT lien_pdf FROM accueil");
+			$row = $select->fetch();
+			unlink("../doc/".$row['lien_pdf']);
+		}
+
+		// on update le lien dans la base de donnée
+		$modifier = $database -> prepare("UPDATE accueil SET lien_pdf = ?");
+		$modifier -> execute(array($fileName));	
 		header("Location: backoffice.php");
-	}
-?>
+	}?>
 	<?php require"../require/header_footer/header_backoffice.php" ?>
 
 	<section id="section-backoffice">	
-		<!-- <p id="texte-backoffice">Toutes modifications sera irrécupérable et automatiquement appliqué instantanément sur la page d'accueil</p> -->
+		<!-- <p id="texte-backoffice">Toutes modifications sera irrÃ©cupÃ©rable et automatiquement appliquÃ© instantanÃ©ment sur la page d'accueil</p> -->
 		<div id="container-backoffice">
 			<div id="left-backoffice">
 				<h1>La sandwicherie<br>de Saint-Vincent</h1>
@@ -58,11 +84,11 @@
 				</div>
 			</div>
 			<div id="right-backoffice">
-				<form role="form" method="post" name="form-modifier-pdf">
-					<embed src="doc/<?php echo $rowSelect['lien_pdf']; ?>"/>
-					<br><br>
+				<form role="form" method="post" name="form-modifier-pdf" enctype="multipart/form-data">
+					<iframe src="../doc/<?php echo $rowSelect['lien_pdf'] ?>" style="width: 100%; min-height: 270px;" frameborder="0"></iframe>					<br><br>
 					<input type="file" name="lien_pdf" accept=".pdf">
-       				<br><br>
+				<br>
+				<br>
 					<input type="submit" name="modifier-pdf" value="Modifier" class="btn-modif">
 				</form>
 			</div>
