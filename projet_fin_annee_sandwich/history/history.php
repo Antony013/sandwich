@@ -260,6 +260,7 @@
 
 						<?php 
 
+							#récupérer les données du filtre de l'utilisateur
 							$selectHist = $database -> prepare("SELECT * FROM historique WHERE fk_user_id = ?");
 							$selectHist -> execute(array($idUser));
 							$rowSelectHist = $selectHist -> fetch();
