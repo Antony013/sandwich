@@ -39,9 +39,9 @@
 			</p>
 		</div>
 		<div id="menu-nav">
-			<a href="#">  Accueil</a>
-			<a href="#">Produits</a>
-			<a href="#">Elèves</a>
+			<a href="backoffice.php">Accueil</a>
+			<a href="boProduits.php">Produits</a>
+			<a href="boEleves.php">Elèves</a>
 		</div>
 	</div>
 </nav>
