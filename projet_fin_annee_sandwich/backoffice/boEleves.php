@@ -21,6 +21,21 @@
 		$newEmail = $_POST['newEmail'];
 		$active = $_POST['active'];
 
+		$ok = True;
+
+		if (empty($newName)){
+			$ok = False;
+			$newProductError = "Un champ n'est pas rempli";
+		}
+		else if (empty($newSurname)){
+			$ok = False;
+			$newProductError = "Un champ n'est pas rempli";
+		}
+		else if (empty($newEmail)){
+			$ok = False;
+			$newProductError = "Un champ n'est pas rempli";
+		}
+
 		if ($active == "Actif"){
 			$active = 1;
 		}
@@ -28,8 +43,26 @@
 			$active = 0;
 		}
 
-		$update = $database -> prepare("UPDATE utilisateur SET nom_user = ? , prenom_user = ? , email_user = ? , active_user = ? WHERE id_user=?");
-		$update -> execute(array($newSurname,$newName,$newEmail,$active,$idModif));
+		$select = $database -> prepare("SELECT email_user FROM utilisateur WHERE id_user != ?");
+		$select -> execute(array($idModif));
+		$new = True;
+		while ($rowSelect = $select -> fetch()){
+			if ($newEmail == $rowSelect['email_user']){
+				$new = False;
+				$newProductError = "Cette adresse E-mail est déjà attribué";
+			}
+		}
+
+		if ($new and $ok){
+			$update = $database -> prepare("UPDATE utilisateur SET nom_user = ? , prenom_user = ? , email_user = ? , active_user = ? WHERE id_user=?");
+			$update -> execute(array($newSurname,$newName,$newEmail,$active,$idModif));
+		}
+		else{
+			echo '	<script language="Javascript">
+						alert ("'.$newProductError.'" )
+					</script>';
+		}
+
 	}
 	else if(isset($_POST["delete-eleve"])){
 		#récupération de l'id du produit à supprimer puis suppresion
@@ -142,7 +175,7 @@
 			      								<div class="modal-body">
 											        <div>
 											        	<form name="delete-eleve" method="post" role="form" > 
-											        		Voulez-vous vraiment supprimer "'.$surnameEleve.$nameEleve.'" ?
+											        		Voulez-vous vraiment supprimer "'.$surnameEleve.' '.$nameEleve.'" ?
 															<input type="hidden" name="idSup" value='.$rowSelect['id_user'].' >
 															<button class="btn btn-default btn-modal btn-delete-eleve" type="submit" name="delete-eleve">Supprimer</button>
 														</form>
