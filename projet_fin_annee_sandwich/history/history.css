@@ -470,20 +470,20 @@ img{
 
 .orderNone{
 	position: absolute;
-	top: 70%;
+	top: 80%;
 	left: 50%;
-	transform: translate(-50%,-70%);
+	transform: translate(-50%,-80%);
 	text-align: center;
 	color: #1F2D46;
 	font-weight: bold;
 }
 
-@media (max-width: 576px){
+/*@media (max-width: 576px){
 	.orderNone{
-		top: 80%;
-		transform: translate(-50%,-80%);
+		bottom: 20%;
+		transform: translate(-50%,-30%);
 	}
-}
+}*/
 
 .orderNone a{
 	color: #f2ca4b;
