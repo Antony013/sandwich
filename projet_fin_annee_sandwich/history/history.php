@@ -256,7 +256,7 @@
 						<a class="btn btn-default" href="#"><span class="bi-hourglass-split"></span><p>Historique</p></a>
 					</div>
 					<div class="col-12 nav-choice">
-						<a class="btn btn-default" href="#"><span class="bi-cart-fill"></span><p>Commander</p></a>
+						<a class="btn btn-default" href="../order"><span class="bi-cart-fill"></span><p>Commander</p></a>
 					</div>
 					<div id="log_out">
 						<a class="btn btn-default" href="../require/logout/logout.php"><span class="bi-box-arrow-left"></span><p>Déconnexion</p></a>
@@ -570,7 +570,7 @@
 						if ($printCom == False){
 							echo "	<div class='col-12 col-md-6 orderNone'>
 										<p>Vous n'avez pas encore passé de commande, voulez-vous y remédier !?</p>
-										<p>Ne manquer pas nos sandwichs incontournables, <a href='#'>commander</a> !</p>
+										<p>Ne manquer pas nos sandwichs incontournables, <a href='../order'>commander</a> !</p>
 										<img src='/img/empty.png'>
 									</div>";
 						}
