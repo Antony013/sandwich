@@ -1,4 +1,4 @@
-/* ----------------------------------- général ----------------------------------- */
+/* ----------------------------------- gÃ©nÃ©ral ----------------------------------- */
 .btn-menu {
 	border: 1px solid #1F2D46;
 	width: 200px;
@@ -91,10 +91,10 @@ section {
 
 @media (max-width: 505px) {
 	.btn-menu, .btn-log, .btn-modif {
-		margin: 50px 25%;
+		margin: 50px 20%;
 	}
 	.btn-log, .btn-modif {
-		margin: 0 25%;
+		margin: 0 20%;
 	}
 }
 
@@ -109,10 +109,10 @@ section {
 
 @media (max-width: 375px) {
 	.btn-menu, .btn-log, .btn-modif {
-		margin: 50px 19%;
+		margin: 50px 9%;
 	}
 	.btn-log, .btn-modif {
-		margin: 0 19%;
+		margin: 0 9%;
 	}
 }
 
@@ -131,6 +131,12 @@ section {
 	position: absolute;
 	text-align: center;
 	top: 110px;
+}
+
+@media (max-width: 486px){
+	#menu-nav{
+		top: 165px;
+	}
 }
 
 #menu-nav a{
@@ -164,88 +170,98 @@ section {
 
 /* ----------------------------------- backoffice products/students ----------------------------------- */
 
-#components-consultation h2 {
-text-align: center;
-color: #1F2D46;
-margin-top: 30px;
+#components-consultation h2 ,#students-consultation h2{
+	text-align: center;
+	color: #1F2D46;
+	margin-top: 30px;
 }
 
-#components-consultation #hr {
-border-top: 1px solid grey;
-width: 200px;
-margin: 0 auto 40px !important;
+#hr {
+	border-top: 1px solid grey;
+	width: 200px;
+	margin: 0 auto 40px !important;
 }
 
-#components-consultation h3{
-width: 70%;
-margin: 50px auto 20px;
-color: #1F2D46;
+#components-consultation h3 , #students-consultation h3{
+	width: 70%;
+	margin: 50px auto 20px;
+	color: #1F2D46;
 }
 
-#components-consultation h3 a{
-color: grey;
-text-decoration: none;
+#components-consultation h3 a, #students-consultation h3 a{
+	color: grey;
+	text-decoration: none;
 }
 
-#components-consultation h3 a:hover{
-color: #f2ca4b;
+#components-consultation h3 a:hover, #students-consultation h3 a:hover{
+	color: #f2ca4b;
 }
 
-#components-consultation td{
-text-align: center;
-position: relative;
+#components-consultation table ,#students-consultation table{
+	width: 70%;
+	margin: 0 auto;
 }
 
-#components-consultation td p{
-position: absolute;
-top: 50%;
-left: 50%;
-transform: translate(-50%,-50%);
+@media (max-width: 600px){
+	#components-consultation table ,#students-consultation table{
+		width: 100%;	}
+}
+
+#components-consultation td, #students-consultation td{
+	text-align: center;
+	position: relative;
+}
+
+#components-consultation td p, #students-consultation td p{
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%,-50%);
 }
 
 .btn-table{
-width: 125px;
-margin-left: 10px;
-margin-right: 10px;
+	width: 125px;
+	margin: 10px;
 }
 
-@media (max-width: 890px){
-.btn-table{
-margin: 10px 0;
-}
-}
-
-.btn-modif-product{
-color: #1F2D46 !important;
-border: 2px solid #1F2D46 !important;
+.btn-modif-product, .btn-modif-eleve{
+	color: #1F2D46 !important;
+	border: 2px solid #1F2D46 !important;
 }
 
-.btn-delete-product,.btn-disable-product{
-color: #1F2D46 !important;
-border: 2px solid #f2ca4b !important;
+.btn-delete-product,.btn-disable-product,.btn-delete-eleve,.btn-disable-eleve{
+	color: #1F2D46 !important;
+	border: 2px solid #f2ca4b !important;
 }
 
-.btn-modif-product:hover{
-color: white !important;
-background-color: #1F2D46;
+.btn-modif-product:hover,.btn-modif-eleve:hover{
+	color: white !important;
+	background-color: #1F2D46;
 }
 
- .btn-disable-product:hover {
-color: white !important;
-background-color: #f2ca4b;
+ .btn-disable-product:hover,.btn-disable-eleve:hover {
+	color: white !important;
+	background-color: #f2ca4b;
 }
 
-.btn-delete-product:hover {
-color: white !important;
-background-color: #dc3546;
-border-color: #dc3546 !important;
+.btn-delete-product:hover , .btn-delete-eleve:hover {
+	color: white !important;
+	background-color: #dc3546;
+	border-color: #dc3546 !important;
 }
 
 .btn-modal{
-float: right;
-margin-top: 20px;
+	float: right;
+	margin-top: 20px;
 }
 
+#components-consultation .modal input, #components-consultation .modal select, #students-consultation .modal input, #students-consultation .modal select{
+	width: 49%;
+	height: 40px;
+	border-color: #1F2D46;
+	display: inline-block;
+	margin-top: 10px;
+}
 
 /* ----------------------------------- login ----------------------------------- */
 #section-register{
@@ -353,7 +369,7 @@ hr {
 	}
 	#form-connect .btn-log, #form-regis .btn-reg {
 		margin-top: 50px;
-		width: 75%;
+		width: 65%;
 	}
 	#box-reg button, #box-reg img, #box-ref button, #box-ref img {
 		width: 100%;
@@ -413,4 +429,22 @@ nav span {
 	#conteneur-nav {
 		justify-content: center;
 	}
+}
+
+/* ----------------------------------- footer ----------------------------------- */
+footer {
+	padding: 30px 0;
+	background-color: #1f2d46;
+	color: white;
+	text-align: center;
+}
+
+footer p {
+	margin: 0;
+}
+
+#footer {
+	display: flex;
+	justify-content: space-evenly;
+	flex-wrap: wrap;
 }
