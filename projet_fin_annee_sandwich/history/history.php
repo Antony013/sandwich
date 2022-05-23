@@ -158,27 +158,11 @@
 								$newDateError = "Une commande ne peut être passée pour un jour antérieur";
 							}
 						}
-						#si le jour saisie est postérieur à celui actuel (dans le même mois) mais qu'il correspond à un samedi OU à un dimanche
-						else if (date_format($newDateCheck, 'w') == 0 || date_format($newDateCheck, 'w') == 6){
-							$newDateError = "Une commande ne peut être passée pour un samedi ou un dimanche";
-						}
-						#si le jour saisie est postérieur à celui actuel mais qu'il correspond à un jour férié
-						else if ( ( (date_format($newDateCheck, 'j') == 1) and (date_format($newDateCheck, 'n') == 1) ) or ( (date_format($newDateCheck, 'j') == 1) and (date_format($newDateCheck, 'n') == 5) ) or ( (date_format($newDateCheck, 'j') == 8) and (date_format($newDateCheck, 'n') == 5) ) or ( (date_format($newDateCheck, 'j') == 14) and (date_format($newDateCheck, 'n') == 7) ) or ( (date_format($newDateCheck, 'j') == 15) and (date_format($newDateCheck, 'n') == 8) ) or ( (date_format($newDateCheck, 'j') == 1) and (date_format($newDateCheck, 'n') == 11) ) or ( (date_format($newDateCheck, 'j') == 11) and (date_format($newDateCheck, 'n') == 11) ) or ( (date_format($newDateCheck, 'j') == 25) and (date_format($newDateCheck, 'n') == 12) ) or ( (date_format($newDateCheck, 'j') == date_format(date_add($easter, date_interval_create_from_date_string('1 day')), 'j')) and (date_format($newDateCheck, 'n') == (date_format($easter, 'n'))) ) or ( (date_format($newDateCheck, 'j') == date_format(date_add($easter, date_interval_create_from_date_string('38 day')), 'j')) and (date_format($newDateCheck, 'n') == (date_format($easter, 'n'))) ) or ( (date_format($newDateCheck, 'j') == date_format(date_add($easter, date_interval_create_from_date_string('11 day')), 'j')) and (date_format($newDateCheck, 'n') == (date_format($easter, 'n'))) ) ){
-							$newDateError = "Une commande ne peut être passée pour un jour férié";
-						}
 					}
 					#sinon erreur dans le mois saisie
 					else{
 						$newDateError = "Une commande ne peut être passée pour un mois antérieur";
 					}
-				}
-				#si le jour saisie est postérieur à celui actuel (dans la même année) mais qu'il correspond à un samedi OU à un dimanche
-				else if (date_format($newDateCheck, 'w') == 0 || date_format($newDateCheck, 'w') == 6){
-					$newDateError = "Une commande ne peut être passée pour un samedi ou un dimanche";
-				}
-				#si le jour saisie est postérieur à celui actuel mais qu'il correspond à un jour férié
-				else if ( ( (date_format($newDateCheck, 'j') == 1) and (date_format($newDateCheck, 'n') == 1) ) or ( (date_format($newDateCheck, 'j') == 1) and (date_format($newDateCheck, 'n') == 5) ) or ( (date_format($newDateCheck, 'j') == 8) and (date_format($newDateCheck, 'n') == 5) ) or ( (date_format($newDateCheck, 'j') == 14) and (date_format($newDateCheck, 'n') == 7) ) or ( (date_format($newDateCheck, 'j') == 15) and (date_format($newDateCheck, 'n') == 8) ) or ( (date_format($newDateCheck, 'j') == 1) and (date_format($newDateCheck, 'n') == 11) ) or ( (date_format($newDateCheck, 'j') == 11) and (date_format($newDateCheck, 'n') == 11) ) or ( (date_format($newDateCheck, 'j') == 25) and (date_format($newDateCheck, 'n') == 12) ) or ( (date_format($newDateCheck, 'j') == date_format(date_add($easter, date_interval_create_from_date_string('1 day')), 'j')) and (date_format($newDateCheck, 'n') == (date_format($easter, 'n'))) ) or ( (date_format($newDateCheck, 'j') == date_format(date_add($easter, date_interval_create_from_date_string('38 day')), 'j')) and (date_format($newDateCheck, 'n') == (date_format($easter, 'n'))) ) or ( (date_format($newDateCheck, 'j') == date_format(date_add($easter, date_interval_create_from_date_string('11 day')), 'j')) and (date_format($newDateCheck, 'n') == (date_format($easter, 'n'))) ) ){
-					$newDateError = "Une commande ne peut être passée pour un jour férié";
 				}
 			}
 			#sinon erreur dans l'année saisie
@@ -187,13 +171,18 @@
 			}
 
 		}
+
 		#si le jour saisie est postérieur à celui actuel (d'une année postérieure à celle séléctionnée) mais qu'il correspond à un samedi OU à un dimanche
-		else if (date_format($newDateCheck, 'w') == 0 || date_format($newDateCheck, 'w') == 6){
+		if (date_format($newDateCheck, 'w') == 0 || date_format($newDateCheck, 'w') == 6){
 			$newDateError = "Une commande ne peut être passée pour un samedi ou un dimanche";
 		}
 		#si le jour saisie est postérieur à celui actuel mais qu'il correspond à un jour férié
 		else if ( ( (date_format($newDateCheck, 'j') == 1) and (date_format($newDateCheck, 'n') == 1) ) or ( (date_format($newDateCheck, 'j') == 1) and (date_format($newDateCheck, 'n') == 5) ) or ( (date_format($newDateCheck, 'j') == 8) and (date_format($newDateCheck, 'n') == 5) ) or ( (date_format($newDateCheck, 'j') == 14) and (date_format($newDateCheck, 'n') == 7) ) or ( (date_format($newDateCheck, 'j') == 15) and (date_format($newDateCheck, 'n') == 8) ) or ( (date_format($newDateCheck, 'j') == 1) and (date_format($newDateCheck, 'n') == 11) ) or ( (date_format($newDateCheck, 'j') == 11) and (date_format($newDateCheck, 'n') == 11) ) or ( (date_format($newDateCheck, 'j') == 25) and (date_format($newDateCheck, 'n') == 12) ) or ( (date_format($newDateCheck, 'j') == date_format(date_add($easter, date_interval_create_from_date_string('1 day')), 'j')) and (date_format($newDateCheck, 'n') == (date_format($easter, 'n'))) ) or ( (date_format($newDateCheck, 'j') == date_format(date_add($easter, date_interval_create_from_date_string('38 day')), 'j')) and (date_format($newDateCheck, 'n') == (date_format($easter, 'n'))) ) or ( (date_format($newDateCheck, 'j') == date_format(date_add($easter, date_interval_create_from_date_string('11 day')), 'j')) and (date_format($newDateCheck, 'n') == (date_format($easter, 'n'))) ) ){
 			$newDateError = "Une commande ne peut être passée pour un jour férié";
+		}
+		#si l'heure de livraison ne se situe pas entre 11H et 13h (ouverture de la cantine)
+		else if ( (intval(date_format($newDateCheck, 'G')) > 13) or (intval(date_format($newDateCheck, 'G')) < 11) ){
+			$newDateError = "Vous ne pouvez commander seulement sur le crénau 11h - 13h";
 		}
 
 		#si il n'y a pas eu d'erreur, alors modifier la date de la commande dans la table
