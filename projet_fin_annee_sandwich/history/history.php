@@ -258,11 +258,32 @@
 					
 					<div class="col-12">
 
+						<?php 
+
+							$selectHist = $database -> prepare("SELECT * FROM historique WHERE fk_user_id = ?");
+							$selectHist -> execute(array($idUser));
+							$rowSelectHist = $selectHist -> fetch();
+
+							#s'il n'y a pas d'historique enregistré
+							$histEmpty = True;
+
+							if (isset($rowSelectHist['dateDebut_hist']) and isset($rowSelectHist['dateFin_hist'])){
+								$histEmpty = False;
+
+								$dateFilterMin = date_create($rowSelectHist['dateDebut_hist']);
+								$dateFilterMax = date_create($rowSelectHist['dateFin_hist']);
+
+								#augmenter d'un jour le filtre max pour qu'il soit pris en compte (à cause des heures qui dépassent)
+								date_add($dateFilterMax, date_interval_create_from_date_string('1 day'));
+							}
+
+						?>
+
 						<form id="filter" method="POST" action="" role=form>
 							<p>Filtrer de : </p>
-							<input type="date" name="dateMin" class="form-control" placeholder="jj/mm/aaaa">
+							<input type="date" name="dateMin" class="form-control" value="<?php echo $rowSelectHist['dateDebut_hist'] ?>">
 							<p id="filterA">à :</p>
-							<input type="date" name="dateMax" class="form-control" placeholder="jj/mm/aaaa">
+							<input type="date" name="dateMax" class="form-control" value="<?php echo $rowSelectHist['dateFin_hist'] ?>">
 							<h4 class="help-inline"><?php echo $newFilterError ?></h4>
 
 							<input id="submit_filter" type="submit" name="submit_filter" value="Appliquer le filtre">
@@ -274,31 +295,15 @@
 					</div>
 
 					<?php
+
 						#récupérer les informations des commandes de l'utilisateur trié
 						if ($trie == "ASC"){
-							$select = $database -> prepare("SELECT * FROM commande WHERE fk_user_id = ? AND annule_com = 0 ORDER BY date_heure_livraison_com ASC");
+							$select = $database -> prepare("SELECT * FROM commande WHERE fk_user_id = ? ORDER BY date_heure_livraison_com ASC");
 						}
 						else{
-							$select = $database -> prepare("SELECT * FROM commande WHERE fk_user_id = ? AND annule_com = 0 ORDER BY date_heure_livraison_com DESC");
+							$select = $database -> prepare("SELECT * FROM commande WHERE fk_user_id = ? ORDER BY date_heure_livraison_com DESC");
 						}
 						$select -> execute(array($idUser));
-
-						$selectHist = $database -> prepare("SELECT * FROM historique WHERE fk_user_id = ? ORDER BY id_hist DESC");
-						$selectHist -> execute(array($idUser));
-						$rowSelectHist = $selectHist -> fetch();
-
-						#s'il n'y a pas d'historique enregistré
-						$histEmpty = True;
-
-						if (isset($rowSelectHist['dateDebut_hist']) and isset($rowSelectHist['dateFin_hist'])){
-							$histEmpty = False;
-
-							$dateFilterMin = date_create($rowSelectHist['dateDebut_hist']);
-							$dateFilterMax = date_create($rowSelectHist['dateFin_hist']);
-
-							#augmenter d'un jour le filtre max pour qu'il soit pris en compte (à cause des heures qui dépassent)
-							date_add($dateFilterMax, date_interval_create_from_date_string('1 day'));
-						}
 
 						#si il n'y a pas de commande enregistrée
 						$printCom = False;
@@ -501,12 +506,22 @@
 											</div>
 										</div>';
 
+								$comCancel = '	<div class="actions">
+													<p><i>Commande annulée</i></p>
+												</div>
+											</div>
+										</div>';
+
 								#booléen indiquant si l'affichage des actions sur la commande a été fait
 								$display = False;
 
+								if ($rowSelect['annule_com'] == 1){
+									echo $comCancel;
+									$display = True;
+								}
 								#si la date de la commande est expirée ou que celle-ci est à moins d'une heure, alors laisser l'affichage par défaut
 								#sinon afficher les actions possibles sur la commande
-								if ($year >= date_format($dateTimeNow, 'Y')){
+								else if ($year >= date_format($dateTimeNow, 'Y')){
 
 									if ($year == date_format($dateTimeNow, 'Y')){
 										if (date_format($deliveryDate, 'n') >= date_format($dateTimeNow, 'n')) {
