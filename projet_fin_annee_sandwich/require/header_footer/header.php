@@ -22,12 +22,12 @@
 	<div id="conteneur-nav">
 		<div id="titre-nav">
 			<a href="/index.php">
-				<img src="/img/logo.png" alt="logo du lycée">
+				<img src="/img/logo.png" alt="logo du lycÃ©e">
 			</a>
 			<p>
-				Lycée Saint-Vincent
+				LycÃ©e Saint-Vincent
 				<br>
-				ENSEIGNEMENT SECONDAIRE & SUPÉRIEUR
+				ENSEIGNEMENT SECONDAIRE & SUPÃ‰RIEUR
 			</p>
 		</div>
 		<div id="login-nav">
